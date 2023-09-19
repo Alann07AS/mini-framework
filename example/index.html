@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="ico48.ico" type="image/x-icon">
+    <script src="data.js"></script>
     <script type="module" src="app.js"></script>
     <title>todo_list_mini_framework</title>
 </head>
@@ -14,13 +15,14 @@
     <section class="todoapp">
         <header class="header">
             <h1>todo_mini</h1>
-            <input class="new-todo" placeholder="What needs to be done?" autofocus="">
+            <!-- <input class="new-todo" placeholder="What needs to be done?" autofocus=""> -->
+            <script src="./elements/newtodo.js"></script>
         </header>
         <section class="main" style="display: block;">
             <input id="toggle-all" class="toggle-all" type="checkbox">
             <label for="toggle-all">Mark all as complete</label>
             <ul class="todo-list">
-                <script src="./elements/el.js"></script>
+                <script src="./elements/todos.js"></script>
                 <!-- Exemple element todo -->
                 <!-- <li data-id="1693828323847" class="">
                     <div class="view">

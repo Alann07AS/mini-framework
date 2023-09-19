@@ -10,8 +10,14 @@ export default {
         const element = document.createElement(tag);
 
         if (props) {
-            for (const [key, value] of Object.entries(props)) {
-                element.setAttribute(key, value);
+            for (const [attr, value] of Object.entries(props)) {
+                if (attr.startsWith('on')){
+                    const eventType = attr.substring(2).toLowerCase();
+                    element.addEventListener(eventType,value);
+                }
+                else {
+                    element.setAttribute(attr, value);
+                }
             }
         }
 
@@ -25,4 +31,7 @@ export default {
         }
         return element;
     },
+    // event: function () {
+        
+    // }
 }
