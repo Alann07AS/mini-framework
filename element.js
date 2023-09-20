@@ -11,11 +11,10 @@ export default {
 
         if (props) {
             for (const [attr, value] of Object.entries(props)) {
-                if (attr.startsWith('on')){
+                if (attr.startsWith('on')) {
                     const eventType = attr.substring(2).toLowerCase();
-                    element.addEventListener(eventType,value);
-                }
-                else {
+                    element.addEventListener(eventType, value);
+                } else {
                     element.setAttribute(attr, value);
                 }
             }
@@ -23,15 +22,15 @@ export default {
 
         for (const child of children) {
             if (typeof child === 'string') {
-                element.innerText = child;
+                element.innerHTML += child;
             } else {
-                if (!child) {continue}
-                element.appendChild(child);
+                if (!child) { continue }
+                element.append(child);
             }
         }
         return element;
     },
     // event: function () {
-        
+
     // }
 }

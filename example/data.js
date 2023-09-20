@@ -1,6 +1,12 @@
+const todos = JSON.parse(localStorage.getItem("todos"));
+
 const data = {
-    /**@type {Array} */
-    todos: JSON.parse(localStorage.getItem("todos")),
+    /**@type {Object} */
+    todos: todos,
+    nb_todo: Object.values(todos).filter(todo => !todo.do).length,
+    all_completed: !Object.values(todos).some(todo=> !todo.do),
+    one_completed: Object.values(todos).some(todo=> todo.do),
+    filter: window.location.hash,
     test:
     {
         0: { name: "HELLO", do: false },

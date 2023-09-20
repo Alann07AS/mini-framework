@@ -5,6 +5,8 @@
 
 // data = data ? data : {};
 
+const _updaters = {}
+
 export default {
     set: function (key, value) {
         console.log(key, value);
@@ -14,15 +16,17 @@ export default {
         return data[key]
     },
     update: function (key, fValue) {
-        const onKeys = data["_onKey"+key];
+        const onKey = _updaters[key];
         data[key] = fValue(data[key])
-        onKeys.forEach(handler => handler());
-        data["_onKey"+key] = onKeys   
+        if (onKey) {
+            onKey()
+        }
     },
     bind: function (key, updater) {
-        var onKey = data["_onKey"+key]
-        onKey = data["_onKey"+key] = onKey && Array.isArray(onKey) ? onKey :[]
-        onKey.push(updater)
+        var onKey = _updaters[key]
+        if (!onKey) {
+            _updaters[key] = updater
+        }
     }
 }
 
