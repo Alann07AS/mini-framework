@@ -29,13 +29,13 @@ export default {
                     el.remove()
                 }
                 for (const el of newElement) {
-                    parentElement_script.insertAdjacentElement("afterend", el)
+                    parentElement_script.insertAdjacentElement("beforebegin", el)
                 }
                 els = newElement
             }
             var els = createElements(updater)
             for (const el of els) {
-                parentElement_script.insertAdjacentElement("afterend", el)
+                parentElement_script.insertAdjacentElement("beforebegin", el)
             }
             // console.log("data", data);
         },

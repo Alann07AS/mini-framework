@@ -29,6 +29,13 @@
                             { checked: "" } : {}
                     ),
 
+                ),
+                mn.element.create(
+                    "label",
+                    {
+                        for: "toggle-all"
+                    },
+                    "Mark all as complete"
                 )
             ]
         })

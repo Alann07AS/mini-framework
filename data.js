@@ -5,29 +5,32 @@
 
 // data = data ? data : {};
 
-const _updaters = {}
+const _updaters = new Map();
 
 export default {
     set: function (key, value) {
-        console.log(key, value);
         data[key] = value;
     },
     get: function (key) {
         return data[key]
     },
     update: function (key, fValue) {
-        const onKey = _updaters[key];
-        data[key] = fValue(data[key])
+        const onKey = _updaters.get(key);
+        data[key] = fValue(data[key]);
         if (onKey) {
-            onKey()
+            for (const updater of onKey.keys()) {
+                updater();
+            }
         }
     },
     bind: function (key, updater) {
-        var onKey = _updaters[key]
-        if (!onKey) {
-            _updaters[key] = updater
-        }
+        // Get or create a Set for the updater functions associated with the key
+        const onKey = _updaters.get(key) || new Set();
+        
+        // Add the updater function to the Set
+        onKey.add(updater);
+
+        // Update the Map with the Set of updater functions
+        _updaters.set(key, onKey);
     }
 }
-
-// app.js est type module donc appeler a la fin donc variable non defini avant function get

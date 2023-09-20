@@ -26,47 +26,14 @@
                     mn.element.create(
                         "ul",
                         {
-                            class:"filters"
+                            class: "filters",
+                            // onclick: _ => mn.data.update("filter")
                         },
                         mn.element.create(
-                            "li",
+                            "script",
                             {
-
-                            },
-                            mn.element.create(
-                                "a",
-                                {
-                                    href:"#/",
-                                    class:"selected"
-                                },
-                                "All"
-                            )
-                        ),
-                        mn.element.create(
-                            "li",
-                            {
-
-                            },
-                            mn.element.create(
-                                "a",
-                                {
-                                    href:"#/active"
-                                },
-                                "Active"
-                            ),
-                        ),
-                        mn.element.create(
-                            "li",
-                            {
-
-                            },
-                            mn.element.create(
-                                "a",
-                                {
-                                    href:"#/completed"
-                                },
-                                "Completed"
-                            ),
+                                src: "./elements/filters.js"
+                            }
                         )
                     ),
                     mn.element.create(
