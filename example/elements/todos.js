@@ -10,12 +10,11 @@
 		mn.insert(scripts_todos, (updater) => {
 			mn.data.bind("todos", updater);
 			mn.data.bind("filter", updater);
-			console.log(data.filter);
 			const todos = mn.data.get("todos")
-			return Object.entries(todos).filter((value)=> 
-			(data.filter !== "#/active" && data.filter !== "#/completed") || // all if all
-			(data.filter === "#/active" && !value[1].do) || // unchecked if active
-			(data.filter === "#/completed" && value[1].do) // checked if completed
+			return Object.entries(todos).filter((value) =>
+				(data.filter !== "active" && data.filter !== "completed") || // all if all
+				(data.filter === "active" && !value[1].do) || // unchecked if active
+				(data.filter === "completed" && value[1].do) // checked if completed
 			).map((value) => {
 				return mn.element.create(
 					"li",
@@ -39,8 +38,8 @@
 
 										mn.data.update("filter", filter => filter)
 										mn.data.update("nb_todo", nb => nb + (done ? -1 : 1))
-										mn.data.update("one_completed", _ => Object.values(todos).some(todo => todo.do))
-										mn.data.update("all_completed", _ => !Object.values(todos).some(todo => !todo.do))
+										mn.data.update("one_completed", _ => updateOneCompleted())
+										mn.data.update("all_completed", _ => updateAllCompleted())
 										SaveTodo() //update todos in localstorage
 									}
 								}, value[1].do ? { checked: {} } : {}
@@ -51,6 +50,7 @@
 							"label",
 							{
 								ondblclick: (e) => {
+									if (data.edit_newtodo) { return } // cancel if is editing a new todo
 									/**@type {HTMLElement}*/
 									const el = e.target
 									const li = el.parentElement.parentElement
@@ -90,10 +90,17 @@
 								class: "destroy",
 								onclick: (e) => {
 									const el = e.target.parentElement.parentElement
+									mn.data.update("one_completed", _ =>  updateOneCompleted())
+									if (Object.keys(data.todos).length === 1) {
+										mn.data.update("show_todos", (_ => false))
+									}
+									if (!data.todos[el.id].do) {
+										mn.data.update("nb_todo", (nb => nb - 1))
+									}
+									el.remove()
 									delete data.todos[el.id]
 									SaveTodo() //update todos in localstorage
-									mn.data.update("nb_todo", (nb => nb - 1))
-									el.remove()
+									mn.data.update("all_completed", _ => updateAllCompleted())
 								}
 							},
 						)

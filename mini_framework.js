@@ -34,9 +34,13 @@ export default {
                 els = newElement
             }
             var els = createElements(updater)
-            for (const el of els) {
-                parentElement_script.insertAdjacentElement("beforebegin", el)
+            const insert = () => {
+                for (const el of els) {
+                    parentElement_script.insertAdjacentElement("beforebegin", el)
+                }
             }
+            insert()
+            // window.addEventListener("load", insert, {once: true})
             // console.log("data", data);
         },
     /**Element is a virtual element of your DOM*/

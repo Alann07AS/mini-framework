@@ -21,6 +21,9 @@
                                     delete data.todos[id]
                                 }
                             }
+                            if (Object.keys(data.todos).length === 0) {
+                                mn.data.update("show_todos", (_ => false))
+                            }
                             mn.data.update("todos", todos => todos)
                             SaveTodo()
                         }

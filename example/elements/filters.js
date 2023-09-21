@@ -6,7 +6,6 @@
     
     import("../../mini_framework.js").then(module => {
         const mn = module.default
-        console.log(data.filter);
         mn.insert(script, (updater) => {
             mn.data.bind("filter", updater)
             return [
