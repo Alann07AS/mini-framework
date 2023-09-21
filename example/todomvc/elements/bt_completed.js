@@ -5,7 +5,7 @@
     const sripts_bt_completed = document.currentScript
 
 
-    import("../../mini_framework.js").then(module => {
+    import("../../../mini_framework.js").then(module => {
         const mn = module.default
         mn.insert(sripts_bt_completed, (updater) => {
             mn.data.bind("all_completed", updater)

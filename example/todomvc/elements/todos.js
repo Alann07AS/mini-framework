@@ -5,7 +5,7 @@
 	const scripts_todos = document.currentScript
 
 
-	import("../../mini_framework.js").then(module => {
+	import("../../../mini_framework.js").then(module => {
 		const mn = module.default
 		mn.insert(scripts_todos, (updater) => {
 			mn.data.bind("todos", updater);

@@ -5,7 +5,7 @@
     const sripts_clear = document.currentScript
 
 
-    import("../../mini_framework.js").then(module => {
+    import("../../../mini_framework.js").then(module => {
         const mn = module.default
         mn.insert(sripts_clear, (updater) => {
             mn.data.bind("one_completed", updater)
@@ -25,6 +25,7 @@
                                 mn.data.update("show_todos", (_ => false))
                             }
                             mn.data.update("todos", todos => todos)
+                            mn.data.update("one_completed", (_ => false))
                             SaveTodo()
                         }
                     },

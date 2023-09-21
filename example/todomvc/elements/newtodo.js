@@ -5,7 +5,7 @@
     const sripts_newtodo = document.currentScript
 
 
-    import("../../mini_framework.js").then(module => {
+    import("../../../mini_framework.js").then(module => {
         const mn = module.default
         mn.insert(sripts_newtodo, (updater) => {
             return [

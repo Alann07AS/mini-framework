@@ -6,7 +6,7 @@
     //save script
     const sripts_compt = document.currentScript
 
-    import("../../mini_framework.js").then(module => {
+    import("../../../mini_framework.js").then(module => {
         const mn = module.default
         mn.insert(sripts_compt, (updater) => {
             mn.data.bind("nb_todo", updater)

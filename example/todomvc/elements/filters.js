@@ -4,7 +4,7 @@
     //save script
     const script = document.currentScript
     
-    import("../../mini_framework.js").then(module => {
+    import("../../../mini_framework.js").then(module => {
         const mn = module.default
         mn.insert(script, (updater) => {
             mn.data.bind("filter", updater)

@@ -1,46 +1,39 @@
-// footer.js
+// main.js
 
 (function () {
     //save script
     const sripts_footer = document.currentScript
 
 
-    import("../../mini_framework.js").then(module => {
+    import("../../../mini_framework.js").then(module => {
         const mn = module.default
         mn.insert(sripts_footer, (updater) => {
             mn.data.bind("show_todos", updater)
             return [
                 mn.element.create(
-                    "footer",
+                    "section",
                     {
-                        class: "footer",
+                        class: "main",
                         style: `display: ${data.show_todos?"block":"none"};`
                     },
                     mn.element.create(
                         "script",
                         {
-                            src: "./elements/compt.js"
+                            src: "./elements/bt_completed.js"
                         },
                     ),
                     mn.element.create(
                         "ul",
                         {
-                            class: "filters",
-                            // onclick: _ => mn.data.update("filter")
+                            class: "todo-list",
                         },
                         mn.element.create(
                             "script",
                             {
-                                src: "./elements/filters.js"
+                                src: "./elements/todos.js"
                             }
                         )
-                    ),
-                    mn.element.create(
-                        "script",
-                        {
-                            src: "./elements/clear.js"
-                        },
-                    ),
+                    )
                 )
             ]
         })
