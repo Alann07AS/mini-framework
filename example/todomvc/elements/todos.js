@@ -90,7 +90,6 @@
 								class: "destroy",
 								onclick: (e) => {
 									const el = e.target.parentElement.parentElement
-									mn.data.update("one_completed", _ =>  updateOneCompleted())
 									if (Object.keys(data.todos).length === 1) {
 										mn.data.update("show_todos", (_ => false))
 									}
@@ -100,6 +99,7 @@
 									el.remove()
 									delete data.todos[el.id]
 									SaveTodo() //update todos in localstorage
+									mn.data.update("one_completed", _ =>  updateOneCompleted())
 									mn.data.update("all_completed", _ => updateAllCompleted())
 								}
 							},
