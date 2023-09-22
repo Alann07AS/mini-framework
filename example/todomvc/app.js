@@ -6,6 +6,10 @@ mn.rout.create("#/", ()=>{
     mn.data.update("filter", _=> "")
 })
 
+mn.rout.create("", ()=>{
+    mn.data.update("filter", _=> "")
+})
+
 mn.rout.create("#/active", ()=>{
     mn.data.update("filter", _=> "active")
 })

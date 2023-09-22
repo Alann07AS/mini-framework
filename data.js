@@ -26,11 +26,19 @@ export default {
     bind: function (key, updater) {
         // Get or create a Set for the updater functions associated with the key
         const onKey = _updaters.get(key) || new Set();
-        
+        console.log(onKey);
         // Add the updater function to the Set
         onKey.add(updater);
 
         // Update the Map with the Set of updater functions
         _updaters.set(key, onKey);
+    },
+    remove_bind: function (key, updater) {
+        // Get or create a Set for the updater functions associated with the key
+        const onKey = _updaters.get(key);
+
+        if (onKey && onKey.has(updater)) {
+            onKey.delete(updater)
+        }
     }
 }

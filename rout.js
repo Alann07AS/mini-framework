@@ -6,7 +6,9 @@
 const _routs = {}
 
 window.addEventListener('hashchange', () => {
-    _routs[window.location.hash]();
+    if (_routs[window.location.hash]) {
+        _routs[window.location.hash]();
+    }
 })
 
 export default {

@@ -16,7 +16,8 @@
                         list: "subjects_data",
                         onkeyup: (e) => {
                             if (e.key === "Enter") {
-                                getSubject(e.target.value)
+                                window.location.href = "#/"+e.target.value
+                                // getSubject(e.target.value)
                             }
                         },
                     },

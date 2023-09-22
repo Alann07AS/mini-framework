@@ -58,6 +58,7 @@ export default {
         get: data.get,
         update: data.update,
         bind: data.bind,
+        remove_bind: data.remove_bind,
     },
     /**Field the body with node param*/
     init: (...nodes) => {
