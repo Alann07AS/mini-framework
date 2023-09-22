@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01Edu_Subject</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+    <script src="data.js"></script>
+    <script type="module" src="app.js"></script>
+    <title>Subject_01Edu</title>
 </head>
+
 <body>
-    
+    <header>
+        <label for="input_subject">Search for subject:</label>
+        <!-- <input id="input_subject" list="subjects_data"> -->
+        <script src="./elements/search.js"></script>
+        <datalist id="subjects_data">
+            <script src="./elements/subjects.js"></script>
+        </datalist>
+    </header>
+    <div id="main">
+
+        <section id="order" onclick='console.log("hello")'>
+            <script src="./elements/mk.js" mk="order"></script>
+        </section>
+        <section id="audit">
+            <script src="./elements/mk.js" mk="audit"></script>
+        </section>
+    </div>
 </body>
+
 </html>
