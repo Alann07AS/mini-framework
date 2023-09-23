@@ -1,7 +1,7 @@
 const data = {
     demos: [
-        {logo: "📝", titre:"todomvc" , href: "/example/todomvc"},
-        {logo: "💻", titre:"01edu_subject" , href: "/example/01edu_subject"},
-        {logo: "🌎", titre:"helloworld" , href: "/example/helloworld"},
+        {logo: "📝", titre:"todomvc" , href: "/mini-framework/example/todomvc"},
+        {logo: "💻", titre:"01edu_subject" , href: "/mini-framework/example/01edu_subject"},
+        {logo: "🌎", titre:"helloworld" , href: "/mini-framework/example/helloworld"},
     ]
 }
