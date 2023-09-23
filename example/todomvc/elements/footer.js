@@ -7,8 +7,10 @@
 
     import("../../../mini_framework.js").then(module => {
         const mn = module.default
-        mn.insert(sripts_footer, (updater) => {
-            mn.data.bind("show_todos", updater)
+        mn.insert(sripts_footer, (updater, old_updater) => {
+            mn.data.bind("show_todos", old_updater((old_el)=>{
+                old_el[0].style.display = data.show_todos?"block":"none"
+            }))
             return [
                 mn.element.create(
                     "footer",

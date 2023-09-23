@@ -18,6 +18,7 @@ mn.rout.create("#/completed", ()=>{
     mn.data.update("filter", _=> "completed")
 })
 
+
 // const section = mn.element.create(
 //     "section",
 //     {

@@ -23,10 +23,17 @@ export default {
             }
         }
     },
+    /**
+     * @typedef {(old_element_updater: Array<HTMLElement>) => Function} OldElementUpdaterFunction
+     */
+    /**
+     * @param {string} key 
+     * @param {OldElementUpdaterFunction} updater 
+     */
     bind: function (key, updater) {
         // Get or create a Set for the updater functions associated with the key
         const onKey = _updaters.get(key) || new Set();
-        console.log(onKey);
+
         // Add the updater function to the Set
         onKey.add(updater);
 

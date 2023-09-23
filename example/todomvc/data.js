@@ -21,8 +21,6 @@ const data = {
 
 delete todos
 
-console.log(data.all_completed);
-
 data.todos = data.todos ? data.todos : {}
 
 // console.log(data.todos);

@@ -17,14 +17,23 @@ import rout from "./rout.js";
 
 export default {
     /**Insert HTMLElement From JS file */
+
+/**
+ * @typedef {} OldElementUpdaterFunction
+ */
+/**
+ * @param {HTMLOrSVGScriptElement} parentElement_script 
+ * @param {{
+*   (updater: Function, old_element_updater: {(old_element_updater: Array<HTMLElement>) => Function}) => Array<HTMLElement>
+* }} createElements 
+*/
+
     insert:
-        /**
-         * @param {HTMLElement} parentElement_script 
-         * @param {Function<string, number>} createElements 
-         */
         (parentElement_script, createElements) => {
-            var updater = () => {
-                const newElement = createElements(updater)
+            /**@type {Array<HTMLElement>}*/
+            var els = []
+            const updater = () => {
+                const newElement = createElements(updater, old_updater)
                 for (const el of els) {
                     el.remove()
                 }
@@ -33,7 +42,13 @@ export default {
                 }
                 els = newElement
             }
-            var els = createElements(updater)
+            const old_updater = (f) => {
+                return () => {
+                    const oldElement = els;
+                    f(oldElement)
+                }
+            }
+            els = createElements(updater, old_updater)
             const insert = () => {
                 for (const el of els) {
                     parentElement_script.insertAdjacentElement("beforebegin", el)
@@ -57,6 +72,11 @@ export default {
         set: data.set,
         get: data.get,
         update: data.update,
+        /**
+         * 
+         * @param {string} key 
+         * @param {OldElementUpdaterFunction} updater 
+        */
         bind: data.bind,
         remove_bind: data.remove_bind,
     },
