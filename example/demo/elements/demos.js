@@ -3,7 +3,7 @@
 	//save actual script element
 	const script = document.currentScript
 	//call the framework
-	import("../../../../mini_framework.js").then(module => {
+	import("../../../mini_framework.js").then(module => {
 		const mn = module.default
 		mn.insert(script, (updater, old_updater) => {
 			// mn.data.bind("demos",updater)
