@@ -16,46 +16,46 @@ const element = mn.element.create('div', { class: 'my-element' }, 'Hello, world!
 To insert element to the real DOM, you can use the scrip in your HTML
 ```html
 <div>
-	<script  src="./elements/myElement.js"></script>
+    <script  src="./elements/myElement.js"></script>
 </div>
 ```
 And use the methode mini-framework.insert, this method take the 
 ```javascript
 //myElement.js
 (function() { 
-		//save actual script element
-	const script = document.currentScript
-	//call the framework
-	import("../../../mini_framework.js").then(module => {
-			const mn = module.default
-		// setup script element and renderer function to insert new elements 
-		mn.insert(script, (updater, old_updater) => {
-				return [
-					mn.element.create(
-						"div", {
-							class: "div_hello"
-					},
-					mn.element.create(
-							"p",
-						{},
-						"Hello, world"
-					)
-				)
-			]
-		})
-	})
+        //save actual script element
+    const script = document.currentScript
+    //call the framework
+    import("../../../mini_framework.js").then(module => {
+            const mn = module.default
+        // setup script element and renderer function to insert new elements 
+        mn.insert(script, (updater, old_updater) => {
+                return [
+                    mn.element.create(
+                        "div", {
+                            class: "div_hello"
+                    },
+                    mn.element.create(
+                            "p",
+                        {},
+                        "Hello, world"
+                    )
+                )
+            ]
+        })
+    })
 })();
 ```
 # Adding Event Listeners <a name="adding-event-listeners"></a>
 You can easily add event listeners create element in properties
 ```javascript
 mn.element.create(
-	"p", {
-		onclick: (e) => {
-			alert("World!")
-		}
-	},
-	"Hello?"
+    "p", {
+        onclick: (e) => {
+            alert("World!")
+        }
+    },
+    "Hello?"
 ),
 ```
 # Routing <a name="routing"></a>
@@ -64,10 +64,10 @@ The mini-framework includes a simple routing mechanism for handling hash endpoin
 import mini_framework from "../../mini_framework.js";
 const mn = mini_framework;
 mn.rout.create("#/", () => {
-	alert("welcome")
+    alert("welcome")
 });
 mn.rout.create("#/about", () => {
-	alert("This framework was write by Alann07AS")
+    alert("This framework was write by Alann07AS")
 })
 ```
 # State Management <a name="state-management"></a>
@@ -75,67 +75,67 @@ The framework provides way to link data to handle auto re render element, you ca
 ```javascript
 // data.js
 const data = {
-	hello: "world",
+    hello: "world",
 }
 ```
 ```javascript
 //myElement.js
 (function() {
-	//save actual script element
-	const script = document.currentScript
-	//call the framework
-	import("../../../../mini_framework.js").then(module => {
-		const mn = module.default
-		// setup script element and renderer function to insert new elements 
-		mn.insert(script, (updater, old_updater) => {
-			//bind the updater to a specifique data key
-			mn.data.bind("hello", updater)
-			// bind "hello" to "updater" will destroy and render again element bellow
-			return [
-				mn.element.create(
-					"div", {
-						class: "div_hello"
-					},
-					mn.element.create(
-						"p", {},
-						"Hello, " + mn.data.get("hello") // data.hello can work to
-					)
-				)
-			]
-		})
-	})
+    //save actual script element
+    const script = document.currentScript
+    //call the framework
+    import("../../../../mini_framework.js").then(module => {
+        const mn = module.default
+        // setup script element and renderer function to insert new elements 
+        mn.insert(script, (updater, old_updater) => {
+            //bind the updater to a specifique data key
+            mn.data.bind("hello", updater)
+            // bind "hello" to "updater" will destroy and render again element bellow
+            return [
+                mn.element.create(
+                    "div", {
+                        class: "div_hello"
+                    },
+                    mn.element.create(
+                        "p", {},
+                        "Hello, " + mn.data.get("hello") // data.hello can work to
+                    )
+                )
+            ]
+        })
+    })
 })();
 ```
 Now element are set to data you can update this data to refresh render
 ```javascript
 //myInput.js
 (function() {
-	//save actual script element
-	const script = document.currentScript
-	//call the framework
-	import("../../../../mini_framework.js").then(module => {
-		const mn = module.default
-		mn.insert(script, (updater, old_updater) => {
-			return [
-				mn.element.create(
-					"input", {
-						class: "hello_class",
-						type: "text",
-						value: data.hello,
-						oninput: (e) => {
-							mn.data.update("hello", (lastValue) => {
-								if (e.data) {
-									return lastValue + e.data
-								} else {
-									return lastValue.slice(0, -1)
-								}
-							})
-						}
-					}
-				)
-			]
-		})
-	})
+    //save actual script element
+    const script = document.currentScript
+    //call the framework
+    import("../../../../mini_framework.js").then(module => {
+        const mn = module.default
+        mn.insert(script, (updater, old_updater) => {
+            return [
+                mn.element.create(
+                    "input", {
+                        class: "hello_class",
+                        type: "text",
+                        value: data.hello,
+                        oninput: (e) => {
+                            mn.data.update("hello", (lastValue) => {
+                                if (e.data) {
+                                    return lastValue + e.data
+                                } else {
+                                    return lastValue.slice(0, -1)
+                                }
+                            })
+                        }
+                    }
+                )
+            ]
+        })
+    })
 })();
 ```
 [Example en demo ici.](https://alann07as.github.io/mini-framework/example/helloworld)
