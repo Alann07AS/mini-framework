@@ -22,7 +22,7 @@ To insert element to the real DOM, you can use the scrip in your HTML
 And use the methode mini-framework.insert, this method take the 
 ```javascript
 //myElement.js
-(function() {
+(function() { 
 		//save actual script element
 	const script = document.currentScript
 	//call the framework
@@ -50,10 +50,9 @@ And use the methode mini-framework.insert, this method take the
 You can easily add event listeners create element in properties
 ```javascript
 mn.element.create(
-		"p",
-	{
-			onclick: (e)=> {
-				alert("World!")
+	"p", {
+		onclick: (e) => {
+			alert("World!")
 		}
 	},
 	"Hello?"
@@ -139,4 +138,4 @@ Now element are set to data you can update this data to refresh render
 	})
 })();
 ```
-[Example en demo ici.](https://alann07as.github.io/mini-framework/example/helloworld
+[Example en demo ici.](https://alann07as.github.io/mini-framework/example/helloworld)
