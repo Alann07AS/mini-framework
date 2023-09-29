@@ -1,6 +1,3 @@
-import data from "./data.js";
-import element from "./element.js";
-import rout from "./rout.js";
 /**
  * Alann Schnebelen
  * Mini-framework (mf), is a mini js framework to help with web app dev.
@@ -14,19 +11,29 @@ import rout from "./rout.js";
  *      -Use state management system
  */
 
+const _updaters = new Map();
+
+const _routs = {}
+
+window.addEventListener('hashchange', () => {
+    if (_routs[window.location.hash]) {
+        _routs[window.location.hash]();
+    }
+})
+
 
 export default {
     /**Insert HTMLElement From JS file */
 
-/**
- * @typedef {} OldElementUpdaterFunction
- */
-/**
- * @param {HTMLOrSVGScriptElement} parentElement_script 
- * @param {{
-*   (updater: Function, old_element_updater: {(old_element_updater: Array<HTMLElement>) => Function}) => Array<HTMLElement>
-* }} createElements 
-*/
+    /**
+     * @typedef {} OldElementUpdaterFunction
+     */
+    /**
+     * @param {HTMLOrSVGScriptElement} parentElement_script 
+     * @param {{
+    *   (updater: Function, old_element_updater: {(old_element_updater: Array<HTMLElement>) => Function}) => Array<HTMLElement>
+    * }} createElements 
+    */
 
     insert:
         (parentElement_script, createElements) => {
@@ -60,25 +67,83 @@ export default {
         },
     /**Element is a virtual element of your DOM*/
     element: {
-        create: element.create,
+        create: function (tag, props, ...children) {
+            /**@type {HTMLElement} */
+            const element = document.createElement(tag);
+
+            if (props) {
+                for (const [attr, value] of Object.entries(props)) {
+                    if (attr.startsWith('on')) {
+                        const eventType = attr.substring(2).toLowerCase();
+                        element.addEventListener(eventType, value);
+                    } else {
+                        element.setAttribute(attr, value);
+                    }
+                }
+            }
+
+            for (const child of children) {
+                if (typeof child === 'string') {
+                    element.innerHTML += child;
+                } else {
+                    if (!child) { continue }
+                    element.append(child);
+                }
+            }
+            return element;
+        },
     },
     /**Root is the management of your url endpoint to handle action*/
     rout: {
-        create: rout.create
-
+        create: function (path, handler) {
+            _routs[path] = handler
+        },
+        remove: function (path) {
+            delete _routs[path]
+        },
     },
     /**State is variable they will be usable everyware in your framework*/
     data: {
-        set: data.set,
-        get: data.get,
-        update: data.update,
+        set: function (key, value) {
+            data[key] = value;
+        },
+        get: function (key) {
+            return data[key]
+        },
+        update: function (key, fValue) {
+            const onKey = _updaters.get(key);
+            data[key] = fValue(data[key]);
+            if (onKey) {
+                for (const updater of onKey.keys()) {
+                    updater();
+                }
+            }
+        },
         /**
-         * 
+         * @typedef {(old_element_updater: Array<HTMLElement>) => Function} OldElementUpdaterFunction
+         */
+        /**
          * @param {string} key 
          * @param {OldElementUpdaterFunction} updater 
-        */
-        bind: data.bind,
-        remove_bind: data.remove_bind,
+         */
+        bind: function (key, updater) {
+            // Get or create a Set for the updater functions associated with the key
+            const onKey = _updaters.get(key) || new Set();
+
+            // Add the updater function to the Set
+            onKey.add(updater);
+
+            // Update the Map with the Set of updater functions
+            _updaters.set(key, onKey);
+        },
+        remove_bind: function (key, updater) {
+            // Get or create a Set for the updater functions associated with the key
+            const onKey = _updaters.get(key);
+
+            if (onKey && onKey.has(updater)) {
+                onKey.delete(updater)
+            }
+        }
     },
     /**Field the body with node param*/
     init: (...nodes) => {
