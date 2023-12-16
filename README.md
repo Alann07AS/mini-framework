@@ -5,8 +5,6 @@ Mini-Framework provides a set of functions and tools to streamline the process o
 # Creating Elements <a name="creating-elements"></a>
 To create a  element, you can use the mini-framework.element.create method
 ```javascript
-import mini_framework  from  "../../mini_framework.js";
-const mn  =  mini_framework;
 const element = mn.element.create('div', { class: 'my-element' }, 'Hello, world!');
 ```
 * The first argument is the HTML tag of the element.
@@ -22,12 +20,11 @@ To insert element to the real DOM, you can use the scrip in your HTML
 And use the methode mini-framework.insert, this method take the 
 ```javascript
 //myElement.js
+// rou can scop if you want
 (function() { 
-        //save actual script element
+        //get actual script element
     const script = document.currentScript
-    //call the framework
-    import("../../../mini_framework.js").then(module => {
-            const mn = module.default
+
         // setup script element and renderer function to insert new elements 
         mn.insert(script, (updater, old_updater) => {
                 return [
@@ -43,7 +40,6 @@ And use the methode mini-framework.insert, this method take the
                 )
             ]
         })
-    })
 })();
 ```
 # Adding Event Listeners <a name="adding-event-listeners"></a>
@@ -61,8 +57,6 @@ mn.element.create(
 # Routing <a name="routing"></a>
 The mini-framework includes a simple routing mechanism for handling hash endpoint. Here's how you can create and use routes
 ```javascript
-import mini_framework from "../../mini_framework.js";
-const mn = mini_framework;
 mn.rout.create("#/", () => {
     alert("welcome")
 });
@@ -84,8 +78,6 @@ const data = {
     //save actual script element
     const script = document.currentScript
     //call the framework
-    import("../../../../mini_framework.js").then(module => {
-        const mn = module.default
         // setup script element and renderer function to insert new elements 
         mn.insert(script, (updater, old_updater) => {
             //bind the updater to a specifique data key
@@ -103,7 +95,6 @@ const data = {
                 )
             ]
         })
-    })
 })();
 ```
 Now element are set to data you can update this data to refresh render
@@ -113,8 +104,6 @@ Now element are set to data you can update this data to refresh render
     //save actual script element
     const script = document.currentScript
     //call the framework
-    import("../../../../mini_framework.js").then(module => {
-        const mn = module.default
         mn.insert(script, (updater, old_updater) => {
             return [
                 mn.element.create(
@@ -135,7 +124,6 @@ Now element are set to data you can update this data to refresh render
                 )
             ]
         })
-    })
 })();
 ```
 [Example en demo ici.](https://alann07as.github.io/mini-framework/example/helloworld)

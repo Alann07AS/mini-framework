@@ -1,7 +1,3 @@
-import mini_framework from "../../mini_framework.js";
-const mn = mini_framework
-
-
 mn.rout.create("#/", ()=>{
     mn.data.update("filter", _=> "")
 })

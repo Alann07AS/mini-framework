@@ -1,12 +1,11 @@
-import mini_framework from "../../mini_framework.js";
-const mn = mini_framework
 
 fetch("https://api.github.com/repos/01-edu/public/contents/subjects").then(p => {
     p.json().then(subjects => {
         mn.data.update("subjects", _ => subjects.filter(s=>s.type==="dir") )
-
+        
         var i = 0;
         window.addEventListener("hashchange", () => {
+            console.log('selected_subject');
             const selected_subject = window.location.hash.replace("#/", "").split("/")
             getSubject(selected_subject.shift())
 

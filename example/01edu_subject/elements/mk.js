@@ -8,20 +8,17 @@
     converter.setFlavor('github');
     converter.setOption('moreStyling', true);
     converter.setOption('ghCodeBlocks', true);
-    import("../../../mini_framework.js").then(module => {
-        const mn = module.default
-        mn.insert(script, (updater) => {
-            mn.data.bind("subject", updater)
-            const html = converter.makeHtml(data.subject[script.getAttribute("mk")]);
-            return [
-                mn.element.create(
-                    "div",
-                    {
+    mn.insert(script, (updater) => {
+        mn.data.bind("subject", updater)
+        const html = converter.makeHtml(data.subject[script.getAttribute("mk")]);
+        return [
+            mn.element.create(
+                "div",
+                {
 
-                    },
-                    html
-                )
-            ]
-        })
+                },
+                html
+            )
+        ]
     })
 })();
