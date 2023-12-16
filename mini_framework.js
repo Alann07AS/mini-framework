@@ -13,7 +13,8 @@
 
 const _updaters = new Map();
 
-const _routs = {}
+const _routs = {};
+
 
 window.addEventListener('hashchange', () => {
     if (_routs[window.location.hash]) {
@@ -22,7 +23,8 @@ window.addEventListener('hashchange', () => {
 })
 
 
-export default {
+const mn =  {
+    id: (id)=>document.getElementById(id),
     /**Insert HTMLElement From JS file */
 
     /**
@@ -40,7 +42,7 @@ export default {
             /**@type {Array<HTMLElement>}*/
             var els = []
             const updater = () => {
-                const newElement = createElements(updater, old_updater)
+                const newElement = createElements(updater, ()=>{})
                 for (const el of els) {
                     el.remove()
                 }
@@ -105,14 +107,14 @@ export default {
     /**State is variable they will be usable everyware in your framework*/
     data: {
         set: function (key, value) {
-            data[key] = value;
+            index(data, key, value);
         },
         get: function (key) {
-            return data[key]
+            return index(data, key);
         },
-        update: function (key, fValue) {
+        update: function (key, fValue = v=>v) {
+            mn.data.set(key, fValue(mn.data.get(key)))
             const onKey = _updaters.get(key);
-            data[key] = fValue(data[key]);
             if (onKey) {
                 for (const updater of onKey.keys()) {
                     updater();
@@ -127,6 +129,7 @@ export default {
          * @param {OldElementUpdaterFunction} updater 
          */
         bind: function (key, updater) {
+            if (typeof updater !== "function") return
             // Get or create a Set for the updater functions associated with the key
             const onKey = _updaters.get(key) || new Set();
 
@@ -149,4 +152,16 @@ export default {
     init: (...nodes) => {
         document.body.append(...nodes)
     },
+}
+
+
+function index(obj,is, value) {
+    if (typeof is == 'string')
+        return index(obj,is.split('.'), value);
+    else if (is.length==1 && value!==undefined)
+        return obj[is[0]] = value;
+    else if (is.length==0)
+        return obj;
+    else
+        return index(obj[is[0]],is.slice(1), value);
 }
