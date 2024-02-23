@@ -1,7 +1,7 @@
 
 # Introduction <a name="introduction"></a>
 Mini-Framework provides a set of functions and tools to streamline the process of building interactive web applications. It abstracts the complexities of DOM manipulation, allowing developers to focus on building functionality and user interfaces.
-[Tout les examples ici.](https://alann07as.github.io/mini-framework/example/demo
+[Tout les examples ici.](https://alann07as.github.io/mini-framework/example/demo)
 # Creating Elements <a name="creating-elements"></a>
 To create a  element, you can use the mini-framework.element.create method
 ```javascript
